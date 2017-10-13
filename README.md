@@ -1,6 +1,8 @@
 # minimal-weather
 Weather app built using Python and Vue.js to display weather information in a simple and concise manner.
 
+Heroku deployed app can be found [here](https://py-vue-weather.herokuapp.com/)
+
 ## Getting Started
 
 These steps will explain how to setup your own version of this weather web app. Below I will go into details regarding how to setup the project using virtualenv to manage the dependencies and provide a clean workspace for the enviornment. 
