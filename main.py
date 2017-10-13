@@ -80,11 +80,13 @@ def weatherAPI():
         _data = { 'zip': request.args.get('zip') }
         _result = requestWeather(_data)
     else:
+        '''
         _geo = getLocationIP()
         _data = { 
             'lat': _geo['latitude'],
             'lon': _geo['longitude'] 
         }
+        '''
         _result = requestWeather(_data)
     return jsonify(_result)
 
