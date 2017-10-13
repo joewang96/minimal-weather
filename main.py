@@ -13,11 +13,14 @@ location = None
 weather_api_key = "79b57a44308eea0e1f732061cf675137"
 
 # Methods
+'''
+-- Can use for local enviornment, but not for heroku --
 def getLocationIP():
 	url = 'http://freegeoip.net/json'
 	req = requests.get(url)
 	res = req.json()
 	return res
+'''
 
 def cleanAPI(_json):
     # if exception is thrown here, then return error message

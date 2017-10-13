@@ -38,8 +38,22 @@ var vm = new Vue({
 		},
 		// Helper method to get weather - "my location"
 		weatherLoc: function() {
-		    var data = { type: 'geolocation' };
-        	this.weatherAPI(data);
+			Vue.nextTick(function(){
+				$.ajax({
+					type: "GET",
+					url: "http://freegeoip.net/json/",
+					success: function(returnData) {
+						var data = { 
+							'lat': returnData.latitude,
+							'lon': returnData.longitude
+						};
+						this.weatherAPI(data);
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						self.error = "Cannot find location - server error";
+					}
+				});
+			});
 		},
 		// Parent method to get weather
 		weatherAPI: function(data) {
