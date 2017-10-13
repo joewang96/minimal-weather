@@ -38,6 +38,7 @@ var vm = new Vue({
 		},
 		// Helper method to get weather - "my location"
 		weatherLoc: function() {
+			var self = this;
 			Vue.nextTick(function(){
 				$.ajax({
 					type: "GET",
@@ -47,7 +48,7 @@ var vm = new Vue({
 							'lat': returnData.latitude,
 							'lon': returnData.longitude
 						};
-						this.weatherAPI(data);
+						self.weatherAPI(data);
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 						self.error = "Cannot find location - server error";
