@@ -26,6 +26,8 @@ Next, using the requirements.txt file included, install the dependancies using t
 pip install -r requirements.txt
 ```
 
+### Running Locally
+
 Once the dependencies are set up, you should be good to run the app using Flask on your local machine. I recommend running the debug option to make sure everything is set up correctly. If you don't want this function, change the 1 to 0 in the following command:
 
 ```
