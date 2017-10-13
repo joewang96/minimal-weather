@@ -86,6 +86,7 @@ def weatherAPI():
             'lon': _geo['longitude'] 
         }
         '''
+        _data = { 'lat': request.args.get('lat'), 'lon': request.args.get('lon') }
         _result = requestWeather(_data)
     return jsonify(_result)
 
