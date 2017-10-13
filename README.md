@@ -34,3 +34,12 @@ Once the dependencies are set up, you should be good to run the app using Flask 
 FLASK_APP=main.py FLASK_DEBUG=1 python -m flask run
 ```
 The app should be running on localhost:5000 by default, so open that up in your browser to launch the weather app
+
+
+### Example Screenshots
+
+![Initial Landing Page for the app](readme_assets/landing.png?raw=true "Landing Page")
+
+![Example Data Page for Location](readme_assets/data.png?raw=true "Example Data Page for Location")
+
+
