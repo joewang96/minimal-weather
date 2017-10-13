@@ -41,7 +41,7 @@ var vm = new Vue({
 			Vue.nextTick(function(){
 				$.ajax({
 					type: "GET",
-					url: "http://freegeoip.net/json/",
+					url: "https://freegeoip.net/json/",
 					success: function(returnData) {
 						var data = { 
 							'lat': returnData.latitude,
