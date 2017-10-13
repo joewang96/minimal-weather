@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="{{ url_for('static', filename='img/purple_diamond.png') }}">
+
+    <title>Py-Vue Weather App | {% block title %}{% endblock %}</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <!-- Core Styles -->
+    <link href="{{ url_for('static', filename='css/core.css') }}" rel="stylesheet">
+    <!-- Additional Styles -->
+    {% block styles %}
+    {% endblock %}
+</head>
+<body>
+    
+    {% block content %}
+    {% endblock %}
+
+    <!-- JQuery Script -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <!-- Additional Scripts -->
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

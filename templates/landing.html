@@ -1,0 +1,90 @@
+{% extends "_layout.html" %}
+{% block title %} Main {% endblock %}
+{% block styles%}
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+{% raw %}
+    <!-- Main app instance -->
+    <div id="app">
+        <transition name="fade-up" mode="out-in">
+            <!-- Launch view -->
+            <div v-if="launched === false" id="_launch" class="main-container" :key="0">
+                <h1>"To the Point" Weather</h1>
+                <p>This is a weather app powered by the OpenWeatherMap API and Vue.js. Simply enter in a US zip code or use your current location to find clear, concise weather information. Weather data is presented in straightforward text, and designed to be able to easily grasp desired information.</p>
+
+                <div class="choice-container">
+                    <div class="choice-group">
+                        <h3>Zip Code</h3>
+                        <p>Want to search for weather data not in your area? Enter in a valid U.S. zip code to look up weather data and be prepared wherever you go!</p>
+                        <div class="input-btn-container">
+                            <input type="text" pattern="[0-9]{5}" name="zip-code" v-model="zip" autocomplete="off">
+                            <button v-on:click="weatherZip" class="bugfix" v-bind:disabled="!isValidUSZip()">Go</button>
+                        </div>
+                    </div>
+                    <div class="choice-group">
+                        <h3>Current Location</h3>
+                        <p>Need on the go weather data applicable to you? Simply allow the app to use your location (may need to wait after) and see weather data based on your area!</p>
+                        <button v-on:click="weatherLoc" class="main-lg bugfix">Use My Location</button>
+                    </div>
+                </div>
+
+                <p v-if="error !== null" v-cloak class="error">{{ error }}</p>
+            </div>
+            <!-- Main data view --> 
+            <div id="_data" v-else :key="1" class="main-container" v-cloak>
+
+                <div class="status-bar">
+                    <p>{{ timestamp() }}</p>
+                    <div class="unit-control">
+                        <p v-on:click="setUnit('F')" v-bind:class="{ 'active': unit == 'F' }">&deg;F</p>
+                        <p v-on:click="setUnit('C')" v-bind:class="{ 'active': unit == 'C' }">&deg;C</p>
+                    </div>
+                </div>
+
+                <h2>It is <span v-bind:class="[getTempClass(weather.temp.current), 'temperature']">{{ convertKelvin(weather.temp.current) }}</span> in <span class="location">{{ weather.name }}</span>. {{ howCloudy() }} {{ howWindy() }}
+                <template v-for="(item, index) in weather.features">
+                    <template v-if="index == 0">
+                        Features include <span class="features">{{ item.description }}</span>
+                    </template>
+                    <template v-else-if="weather.features.length == 2">
+                        and <span class="features">{{ item.description }}</span>
+                    </template>
+                    <template v-else>
+                        , <span class="features">{{ item.description }}</span>
+                    </template>
+                </template>.</h2>
+
+                <div class="choice-container meta-data no-break">
+                    <div class="choice-group">
+                        <p class="subtitle">Max Temp</p>
+                        <p class="data" v-bind:class="[getTempClass(weather.temp.max), 'temperature']">{{ convertKelvin(weather.temp.max) }}</p>
+                    </div> 
+                    <div class="choice-group">
+                        <p class="subtitle">Min Temp</p>
+                        <p class="data" v-bind:class="[getTempClass(weather.temp.min), 'temperature']">{{ convertKelvin(weather.temp.min) }}</p>
+                    </div>
+                    <div class="choice-group">
+                        <p class="subtitle">Humidity</p>
+                        <p class="data">{{ weather.humidity }}%</p>
+                    </div>
+                    <div class="choice-group">
+                        <p class="subtitle">Wind Speed</p>
+                        <p class="data">{{ weather.wind.speed }} m/sec</p>
+                    </div>
+                </div>
+                
+                <button v-on:click="goBack" class="main-lg bugfix">Change Location</button>
+            </div>
+        </transition>        
+
+    </div>
+{% endraw %}
+{% endblock %}
+{% block scripts %}
+    <!-- Vue JS Script -->
+    <script type="text/javascript" src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+    <!-- Custom Script -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}
