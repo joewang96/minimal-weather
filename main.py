@@ -69,9 +69,8 @@ def requestWeather(_data):
 # Routes
 @app.route('/')
 def landing():
-    location = getLocationIP()
     # render the landing page template here
-    return render_template('landing.html', location=location)
+    return render_template('landing.html')
 
 @app.route('/weather', methods=['GET'])
 def weatherAPI():
